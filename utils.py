@@ -3,6 +3,7 @@ from tqdm import tqdm
 import torch
 import matplotlib.pyplot as plt
 import seaborn as sns
+import Levenshtein
 
 
 def num_parameters(model):
@@ -75,7 +76,7 @@ def indices_to_chars(indices, vocab, SOS_TOKEN=0, EOS_TOKEN=1, PAD_TOKEN=30):
 # Function to calculate Levenshtein distance
 def calc_edit_distance(predictions,batch_size, y, y_len, vocab, print_example=False):
     dist = 0.0
-#     batch_size, seq_len = predictions.shape
+    batch_size, seq_len = predictions.shape
 
     for batch_idx in range(batch_size):
         y_sliced = predictions[batch_idx]
@@ -86,7 +87,7 @@ def calc_edit_distance(predictions,batch_size, y, y_len, vocab, print_example=Fa
         pred_string = "".join(pred_sliced)
 
         # Uncomment to use Levenshtein distance calculation, if you have a function/library
-        # dist += Levenshtein.distance(pred_string, y_string)
+        dist += Levenshtein.distance(pred_string, y_string)
 
         if print_example:
             print("\nGround Truth : ", y_string)

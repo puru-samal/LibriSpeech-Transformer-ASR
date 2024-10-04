@@ -16,7 +16,6 @@ import numpy as np
 import pandas as pd
 
 from encoder import *
-import Levenshtein
 import warnings
 warnings.filterwarnings("ignore")
 device = "cuda" if torch.cuda.is_available() else "cpu"
