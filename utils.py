@@ -124,7 +124,9 @@ def plot_attention(attention):
     # You need to get a diagonal plot
     plt.clf()
     sns.heatmap(attention, cmap='GnBu')
-    plt.show()
+    plt.savefig('attn_hmap.png')
+    print("saved attn_hmap.png")
+    #plt.show()
 
 def calculate_entropy(att_weights):
     epsilon = 1e-10 
@@ -142,7 +144,9 @@ def visualize_attention(attention_weights, index=0):
     plt.title(f'Attention Weights for Sample {index}')
     plt.xlabel('Key Position')
     plt.ylabel('Query Position')
-    plt.show()
+    plt.savefig('attn.png')
+    print("saved attn_viz.png")
+    #plt.show()
 
 
 def train_model(model, train_loader, optimizer, loss_func, scaler, device):

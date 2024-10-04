@@ -61,7 +61,7 @@ class ASREncoder(nn.Module):
         """
         if mode == "greedy":
             # Perform greedy decoding
-            outputs, _, _ = self.forward(x, input_lengths)
+            outputs, _, _ = self.forward(x)
             decoded_indices = self.greedy_decode(outputs)
             decoded_transcriptions = [''.join([idx_to_char[idx] for idx in seq]) for seq in decoded_indices]
             return decoded_transcriptions
