@@ -1,0 +1,56 @@
+###### Dataset -----------------------------------------------------------------
+data_root: "11-785-s24-hw4p2"
+train_partition: "train-clean-100"
+val_partition: "dev-clean"
+test_partition: "test-clean"
+cepstral_norm: True
+num_classes: 31
+input_dim: 28
+batch_size: 64 # decrease this as you modify the network architecture
+
+###### SpecAugument --------------------------------------------------
+time_mask_width: 50
+time_mask_p: 0.3
+freq_mask_width: 10
+
+###### Encoder Parameters ------------------------------------------
+enc_dropout: 0.1 # [0.1, 0.4]
+enc_num_layers: 2 # [1, 3]
+enc_num_heads: 2 # [1, 4]
+
+###### Decoder Parameters ------------------------------------------
+dec_dropout: 0.1 # [0.1, 0.4]
+dec_num_layers: 2 # [1, 3]
+dec_num_heads: 2 # [1, 4]
+
+###### Network Parameters ------------------------------------------------------
+d_model: 512 # [256, 1024]
+d_ff: 2048 # [512, 4096]
+
+###### Learning Rate ---------------------------------------------------------------
+learning_rate: 0.0005 # [1E-3, 1E-4], this will depend on the specified optimizer
+
+###### Optimizer ---------------------------------------------------------------
+optimizer: "AdamW" # Adam, AdamW
+
+## if SGD
+momentum: 0.0
+nesterov: True
+weight_decay: 0.00001
+
+###### Scheduler ---------------------------------------------------------------
+scheduler: "CosineAnnealing" # CosineAnnealing, ReduceLR
+
+## if ReduceLR
+
+## we are validating every 2 epochs but scheduler acts on every epoch. Set patience accordingly
+## patience less than validation frquency can mean learning rate always dropping after patience epochs
+## specify a suitable threshold too
+factor: 0.9
+patience: 5
+
+###### Training Parameters -----------------------------------------------------
+epochs: 50
+
+###### Name --------------------------------------------------------------------
+Name: "TA:Puru" # write your name here for study group
