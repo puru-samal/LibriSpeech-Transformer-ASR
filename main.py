@@ -190,13 +190,11 @@ for epoch in range(e, epochs):
     print("\nEpoch {}/{}: \nTrain Loss {:.04f}\t Train Perplexity {:.04f}\t Learning Rate {:.04f}".format(
         epoch + 1, config["epochs"], train_loss, train_perplexity, curr_lr))
 
-
-    attn = attention_weights.cpu().detach().numpy()
-    print(attn.shape)
-    plot_attention(attn)
-    visualize_attention(attention_weights[None, :, ])
     if (epoch % 5 == 0):    # validate every 2 epochs to speed up training
         # After training, you can validate the model using the following calls:
+        attn = attention_weights.cpu().detach().numpy()
+        plot_attention(attn)
+        visualize_attention(attention_weights[None, :, ])
 
         # Greedy Decoding Validation
         running_distance = validate_and_save_predictions(model, val_loader, idx_to_char=idx_to_char, vocab=VOCAB, mode="greedy", output_file="greedy_predictions.txt")
