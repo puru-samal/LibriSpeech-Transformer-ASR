@@ -3,6 +3,7 @@ data_root: "11-785-s24-hw4p2"
 train_partition: "train-clean-100"
 val_partition: "dev-clean"
 test_partition: "test-clean"
+subset: 1.0
 cepstral_norm: True
 num_classes: 31
 input_dim: 28

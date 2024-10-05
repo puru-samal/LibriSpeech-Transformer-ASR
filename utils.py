@@ -4,6 +4,7 @@ import torch
 import matplotlib.pyplot as plt
 import seaborn as sns
 import Levenshtein
+import numpy as np
 
 
 def num_parameters(model):
@@ -74,12 +75,12 @@ def indices_to_chars(indices, vocab, SOS_TOKEN=0, EOS_TOKEN=1, PAD_TOKEN=30):
     return tokens
 
 # Function to calculate Levenshtein distance
-def calc_edit_distance(predictions,batch_size, y, y_len, vocab, print_example=False):
+def calc_edit_distance(predictions, batch_size, y, y_len, vocab, print_example=True):
     dist = 0.0
-    batch_size, seq_len = predictions.shape
+    #batch_size = len(predictions)
 
     for batch_idx in range(batch_size):
-        y_sliced = predictions[batch_idx]
+        y_sliced =  indices_to_chars(y[batch_idx, :y_len[batch_idx]], vocab)
         pred_sliced = predictions[batch_idx]
 
         # strings - when you are using characters from the SpeechDataset
@@ -88,7 +89,6 @@ def calc_edit_distance(predictions,batch_size, y, y_len, vocab, print_example=Fa
 
         # Uncomment to use Levenshtein distance calculation, if you have a function/library
         dist += Levenshtein.distance(pred_string, y_string)
-
         if print_example:
             print("\nGround Truth : ", y_string)
             print("Prediction   : ", pred_string)
